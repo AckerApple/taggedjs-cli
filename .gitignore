@@ -1,4 +1,7 @@
 # Logs
+.DS_Store
+js/
+.history
 logs
 *.log
 npm-debug.log*

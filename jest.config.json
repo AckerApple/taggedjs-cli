@@ -1,0 +1,28 @@
+{
+  "restoreMocks": true,
+  "clearMocks": true,
+  "resetMocks": true,
+  "moduleFileExtensions": [
+    "js",
+    "json",
+    "node",
+    "ts"
+  ],
+  "rootDir": "./ts",
+  "testRegex": ".*(\\.spec|(\\.spec\\.int))\\.ts$",
+  "transform": {
+    "^.+\\.ts$": "ts-jest"
+  },
+  "collectCoverageFrom": [
+    "**/*.{ts,js,jsx}",
+    "!**/*.spec.{ts,js,jsx}",
+    "!**/*.spec.e2e.{ts,js,jsx}",
+    "!**/_*.{ts,js,jsx}",
+    "!**/node_modules/**",
+    "!**/app/**",
+    "!**/.history/**",
+    "!**/message-definitions/**"
+  ],
+  "coverageDirectory": "../coverage",
+  "coverageReporters": ["cobertura"]
+}

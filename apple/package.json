@@ -1,0 +1,14 @@
+{
+  "name": "apple",
+  "version": "0.0.0",
+  "description": "My TaggedJs driven project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "bundle": "tj bundle"
+  },
+  "dependencies": {
+    "taggedjs": "^2.4.32",
+    "taggedjs-dump": "^0.1.2"
+  }
+}
