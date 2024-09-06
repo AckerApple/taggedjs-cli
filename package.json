@@ -2,7 +2,7 @@
   "type": "module",
   "main": "bin/index.js",
   "name": "taggedjs-cli",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "quick setup and maintenance of a taggedjs project",
   "scripts": {
     "start": "ts-node ./src/tj.mts -i",
@@ -13,7 +13,7 @@
     "build:es-stamp": "rm -rf ./es-stamp && tsc --project ./tsconfig.es-stamp.json",
     "copy:js-stamp-files": "cp ts-stamp/*.html js-stamp/ && cp -R ts-stamp/assets js-stamp",
     "copy:es-stamp-files": "cp ts-stamp/*.html es-stamp/ && cp -R ts-stamp/assets es-stamp",
-    "save": "git add . && git commit -m \"patch\" && git push",
+    "save": "npm run patch:version && git add . && git commit -m \"patch\" && git push",
     "patch:version": "npm --no-git-tag-version version patch",
     "tj": "node ./bin/tj.mjs -i",
     "publish": "npm run build && npm run save && npm publish"
