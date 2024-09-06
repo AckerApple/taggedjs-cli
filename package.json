@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "taggedjs-cli",
   "private": true,
   "version": "0.0.0",
@@ -6,11 +7,12 @@
   "scripts": {
     "start": "ts-node ./src/tj.mts -i",
     "build": "run-s build:js build:dist:only build:gh-pages && echo \"✅ Build completed\"",
-    "build:js": "run-s build:bin build:js-stamp copy:js-stamp-files copy:es-stamp-files",
+    "build:js": "run-s build:bin build:js-stamp copy:js-stamp-files build:es-stamp copy:es-stamp-files",
     "build:bin": "rm -rf ./bin && tsc --project ./tsconfig.bin.json",
     "build:js-stamp": "rm -rf ./js-stamp && tsc --project ./tsconfig.js-stamp.json",
-    "copy:js-stamp-files": "cp ts-stamp/document.css js-stamp/document.css && cp ts-stamp/index.html js-stamp/index.html",
-    "copy:es-stamp-files": "cp ts-stamp/document.css es-stamp/document.css && cp ts-stamp/index.html es-stamp/index.html",
+    "build:es-stamp": "rm -rf ./es-stamp && tsc --project ./tsconfig.es-stamp.json",
+    "copy:js-stamp-files": "cp ts-stamp/*.html js-stamp/ && cp -R ts-stamp/assets js-stamp",
+    "copy:es-stamp-files": "cp ts-stamp/*.html es-stamp/ && cp -R ts-stamp/assets es-stamp",
     "build:dist": "run-s build build:dist:only",
     "build:dist:only": "cp README.MD ./dist/README.md && npm run build:dist:pack && rm -rf ./dist/js && cp -R js ./dist && cp -R ./dist/. ../dist",
     "build:dist:pack": "cp package.json ./dist/package.json && echo \"✅ copied package.json to ./dist\" && node scripts/package-dist.cjs",
@@ -20,10 +22,11 @@
     "build:gh-pages": "cp -R js/. ../gh-pages/node_modules/taggedjs/js && cd ../gh-pages && npm run build && echo \"🔬 Built gh-pages\"",
     "build:watch:gh-pages": "chokidar 'ts/**/*' -c 'npm run build:js && npm run build:dist:only && npm run build:gh-pages'",
     "patch:version": "npm --no-git-tag-version version patch",
+    "tj": "node ./bin/tj.mjs -i",
     "publish": "npm run build:dist && npm run save:dist && cd ../dist && npm publish"
   },
   "bin": {
-    "tj": "./bin/tj"
+    "tj": "./bin/tj.mjs"
   },
   "keywords": [
     "react",
@@ -47,7 +50,7 @@
     "jest": "^29.7.0",
     "nodemon": "^3.0.2",
     "npm-run-all": "^4.1.5",
-    "taggedjs": "^2.4.32",
+    "taggedjs": "^2.6.2",
     "ts-jest": "^29.1.2",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",

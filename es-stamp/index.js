@@ -5,3 +5,4 @@ export const run = () => {
         tagElement(app, element, {});
     });
 };
+run();

@@ -5,10 +5,18 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "bundle": "tj bundle"
+    "bundle": "tj bundle",
+    "bundle:relative": "node ../bin/tj.mjs bundle",
+    "tj": "node ../bin/tj.mjs -i"
+  },
+  "devDependencies": {
+    "fs-extra": "^11.2.0"
   },
   "dependencies": {
     "taggedjs": "^2.4.32",
-    "taggedjs-dump": "^0.1.2"
+    "taggedjs-animate-css": "^0.0.3",
+    "taggedjs-dump": "^0.1.2",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.5"
   }
 }

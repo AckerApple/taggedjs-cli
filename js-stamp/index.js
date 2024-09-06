@@ -9,3 +9,4 @@ const run = () => {
     });
 };
 exports.run = run;
+(0, exports.run)();

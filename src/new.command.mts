@@ -6,12 +6,15 @@ import * as util from 'util'
 import packageJson from './package.mjs'
 import inquirer from 'inquirer'
 import { IGNORE, InteractiveCommand } from './command.utils.mjs'
+import { readJsonFile } from './readJsonFile.function.mjs'
+import { nameBundleDependenciesFor } from './nameBundleDependenciesFor.function.mjs'
+import { bundle, bundleTaggedJsPath } from './bundle.command.mjs'
 
 const promiseExec = util.promisify(exec)
 
 inquirer.prompt
 
-export const init: InteractiveCommand = {
+export const newCommand: InteractiveCommand = {
   vars: {
     language: {
       demandOption: true,
@@ -59,29 +62,40 @@ export const init: InteractiveCommand = {
       }
     }
   },
-  label: '💥 init',
+  label: '💥 new',
   command: {
-    command: 'init',
+    command: 'new',
     describe: 'Create taggedjs driven project',
     handler,
   } as any,
 }
 
-type args = {
+type argBase = {
   language: string
   projectName: string
   folderName: string
+}
+
+
+type args = argBase & {
   bundle: string
 }
 
+type argsValid = argBase & {
+  bundle: boolean
+}
+
 async function handler(args: args) {
-  await run(args)
+  await run({
+    ...args,
+    bundle: args.bundle === 'false' ? false : true
+  })
   console.log(`✅ Successfully initialized a taggedjs project`)
 }
 
-async function run(args: args) {
+async function run(args: argsValid) {
   const {
-    folderName, projectName, language
+    folderName, projectName, language,
   } = args
 
   // Define folder name and package.json content
@@ -89,15 +103,16 @@ async function run(args: args) {
   packageJsonContent.name = projectName
 
   // Create folder
-  createFolder(folderName);
+  createFolder(folderName)
 
   // Create package.json file
-  createPackageJson(folderName, packageJsonContent);
+  createPackageJson(folderName, packageJsonContent)
 
   const dependencies = {...packageJsonContent.dependencies}
 
   if(language === 'typescript') {
     dependencies['typescript'] = '^5.3.3'
+    dependencies['ts-loader'] = '^9.5.1'
   }
 
   console.info('📦 Installing dependencies...')
@@ -112,8 +127,8 @@ async function run(args: args) {
 }
 
 async function copyProjectItems({
-  language, folderName, bundle
-}: args) {
+  language, folderName, bundle,
+}: argsValid) {
   let stamp = 'ts-stamp'
 
   switch (language) {
@@ -126,21 +141,77 @@ async function copyProjectItems({
       break;
   }
 
-  await copyItemsTo(stamp, folderName)
+  const promises = []
+  promises.push( fsExtra.copy(stamp, path.join(folderName,'src')) )
 
   console.info('📄 Preparing root folder files...')
-  if(bundle === 'false') {
-    await fsExtra.copy(path.join(folderName,'src'), path.join(folderName))
-    await fsExtra.remove(path.join(folderName,'src'))
+  const src = 'src'
+  const srcDynamic = bundle ? src : ''
+
+  promises.push(
+    fsExtra.copy('.gitignore', path.join(folderName,'.gitignore')),
+    fsExtra.copy('.vscode', path.join(folderName,'.vscode')),
+  )
+  
+  if(!bundle) {
+    await fsExtra.copy(path.join(folderName, src), path.join(folderName))
+    await fsExtra.remove(path.join(folderName, src))
   }
 
   if(language === 'typescript') {
-    await fsExtra.move(
-      path.join(folderName,'src','tsconfig.json'),
-      path.join(folderName,'tsconfig.json'),
-      {overwrite: true}
+    promises.push(
+      fsExtra.copy(
+        path.join('tsconfig.stamp.json'),
+        path.join(folderName,'tsconfig.json'),
+        {overwrite: true}
+      )
     )
   }
+
+  const taggedjsJson = readJsonFile('taggedjs.stamp.json')
+
+  if(['javascript','ecmascript'].includes(language)) {
+    taggedjsJson.entry = path.join('./', srcDynamic, 'index.js')
+  }
+
+  if(!bundle) {
+    taggedjsJson.dependencies = {
+      taggedjs: {
+        entryPackage: './node_modules/taggedjs',
+        entry: './js/index.js',
+        outDir: ''
+      },
+      'taggedjs-animate-css': {
+        // variableName: 'taggedjsAnimateCss',
+        entryPackage: './node_modules/taggedjs-animate-css',
+        entry: './js/index.js',
+        outDir: ''
+      },
+      'taggedjs-dump': {
+        // variableName: 'taggedjsDump',
+        entryPackage: './node_modules/taggedjs-dump',
+        entry: './js/index.js',
+        outDir: ''
+      }  
+    }
+  }
+
+  const taggedjsJsonPath = path.join(folderName,'taggedjs.json')
+  fs.writeFileSync(taggedjsJsonPath, JSON.stringify(taggedjsJson, null, 2))
+
+  const fullFolderPath = path.join(process.cwd(), folderName)
+  if(bundle) {
+    promises.push(
+      bundleTaggedJsPath(fullFolderPath)
+    )
+  } else {
+    const fullJsonPath = path.join(process.cwd(), taggedjsJsonPath)
+    promises.push(
+      nameBundleDependenciesFor(fullJsonPath)
+    )
+  }
+  
+  await Promise.all(promises)
 }
 
 // Function to create a folder
@@ -151,10 +222,6 @@ const createFolder = (folderName: string) => {
   } else {
       console.log(`📂 Folder "${folderName}" already exists.`);
   }
-}
-
-async function copyItemsTo(itemName: string, folderName: string) {
-  await fsExtra.copy(itemName, path.join(folderName,'src'))
 }
 
 // Function to create package.json file

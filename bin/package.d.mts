@@ -6,10 +6,16 @@ declare const _default: {
     scripts: {
         start: string;
         bundle: string;
+        "bundle:relative": string;
+        tj: string;
+    };
+    devDependencies: {
+        "fs-extra": string;
     };
     dependencies: {
         taggedjs: string;
         "taggedjs-dump": string;
+        "taggedjs-animate-css": string;
     };
 };
 export default _default;

@@ -1,2 +1,2 @@
 import { InteractiveCommand } from './command.utils.mjs';
-export declare const init: InteractiveCommand;
+export declare const newCommand: InteractiveCommand;
