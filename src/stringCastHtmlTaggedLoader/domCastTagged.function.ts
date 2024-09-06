@@ -1,9 +1,10 @@
 // taggedjs-no-compile
 
-import { checkSumParseResults, parsedResultsToStringArray } from "./checksum.function.js"
+import { checkSumParseResults } from "./checksum.function.js"
 import { reconstructCode } from "./reconstructCode.function.js"
 import { reconstructedToOutput } from "./reconstructedToOutput.function.js"
-import { ParsedResults, string, stringCastHtml } from "./stringCastHtmlTagged.function.js"
+import { ParsedResults, string} from "./typings.js"
+import { stringCastHtml } from "./stringCastHtmlTagged.function.js"
 
 export default function domCastTagged(
   code: string,

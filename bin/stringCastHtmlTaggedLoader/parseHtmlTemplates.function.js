@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseHtmlTemplates = exports.removeInterpolatedValues = void 0;
-function removeInterpolatedValues(input) {
+export function removeInterpolatedValues(input) {
     const strings = [];
     const values = [];
     let lastIndex = 0;
@@ -48,8 +45,7 @@ function removeInterpolatedValues(input) {
     }
     return { strings, values };
 }
-exports.removeInterpolatedValues = removeInterpolatedValues;
-function parseHtmlTemplates(code) {
+export function parseHtmlTemplates(code) {
     const results = [];
     let lastIndex = 0;
     let index = 0;
@@ -102,5 +98,4 @@ function parseHtmlTemplates(code) {
     }
     return results;
 }
-exports.parseHtmlTemplates = parseHtmlTemplates;
 //# sourceMappingURL=parseHtmlTemplates.function.js.map

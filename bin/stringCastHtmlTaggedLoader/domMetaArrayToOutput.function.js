@@ -1,13 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.domMetaArrayToOutput = void 0;
-function domMetaArrayToOutput(reconstructed, allDom, varName, filePath) {
+export function domMetaArrayToOutput(reconstructed, allDom, varName, filePath) {
     const outputVarString = customStringify(allDom);
     const allStrings = `\n// @ts-ignore\nconst allStrings = {${varName}:${outputVarString}}`;
     const output = reconstructed.code + allStrings;
     return output;
 }
-exports.domMetaArrayToOutput = domMetaArrayToOutput;
 function customStringify(obj) {
     const funStrings = obj.map(o => JSON.stringify(o));
     const jsonString = '[' + funStrings.join(',') + ']';

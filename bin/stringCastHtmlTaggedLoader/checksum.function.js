@@ -1,6 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.parsedResultsToStringArray = exports.checkSumParseResults = void 0;
 function checksum(str) {
     let checksum = 0;
     for (let i = 0; i < str.length; i++) {
@@ -8,13 +5,12 @@ function checksum(str) {
     }
     return checksum;
 }
-function checkSumParseResults(finalResults) {
+export function checkSumParseResults(finalResults) {
     const stringsConcat = parsedResultsToStringArray(finalResults);
     const stringChecksum = checksum(stringsConcat);
     return stringChecksum;
 }
-exports.checkSumParseResults = checkSumParseResults;
-function parsedResultsToStringArray(finalResults) {
+export function parsedResultsToStringArray(finalResults) {
     const stringsConcat = typeof finalResults === 'string' ? finalResults : finalResults.reduce((all, x) => {
         const strings = x.strings;
         if (strings === undefined) {
@@ -28,5 +24,4 @@ function parsedResultsToStringArray(finalResults) {
     }, []).join('');
     return stringsConcat;
 }
-exports.parsedResultsToStringArray = parsedResultsToStringArray;
 //# sourceMappingURL=checksum.function.js.map

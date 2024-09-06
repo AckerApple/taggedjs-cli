@@ -1,6 +1,6 @@
 // taggedjs-no-compile
 
-import { ParsedResults, string } from "./stringCastHtmlTagged.function.js"
+import { ParsedResults, string } from "./typings.js"
 
 type AllStrings = {
   strings:string[]

@@ -1,4 +1,4 @@
-import { ParsedResults } from "./stringCastHtmlTagged.function";
+import { ParsedResults } from './typings.js'
 
 function checksum(str: string) {
   let checksum = 0;

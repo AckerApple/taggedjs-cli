@@ -1,13 +1,10 @@
-"use strict";
 // taggedjs-no-compile
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.reconstructCode = void 0;
-const stringCastHtmlTagged_function_js_1 = require("./stringCastHtmlTagged.function.js");
-function reconstructCode(parsedResults, allVarName, funName = 'html') {
+import { string } from "./typings.js";
+export function reconstructCode(parsedResults, allVarName, funName = 'html') {
     const allStrings = [];
     let allStringsIndex = 0;
     const transform = (item) => {
-        if (typeof item === stringCastHtmlTagged_function_js_1.string) {
+        if (typeof item === string) {
             return item;
         }
         else if (item instanceof Array) {
@@ -24,7 +21,7 @@ function reconstructCode(parsedResults, allVarName, funName = 'html') {
             });
             const currentStringsIndex = allStringsIndex++;
             const transformedValues = values.map((value) => {
-                if (typeof value === stringCastHtmlTagged_function_js_1.string) {
+                if (typeof value === string) {
                     return value;
                 }
                 else {
@@ -43,5 +40,4 @@ function reconstructCode(parsedResults, allVarName, funName = 'html') {
         allStrings
     };
 }
-exports.reconstructCode = reconstructCode;
 //# sourceMappingURL=reconstructCode.function.js.map

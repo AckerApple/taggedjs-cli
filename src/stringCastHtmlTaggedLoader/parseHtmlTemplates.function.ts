@@ -1,4 +1,4 @@
-import { ParsedResult } from "./stringCastHtmlTagged.function.js"
+import { ParsedResult } from "./typings.js"
 
 export function removeInterpolatedValues(input: string) {
     const strings: string[] = [];

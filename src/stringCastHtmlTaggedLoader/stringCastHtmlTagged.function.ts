@@ -3,11 +3,7 @@
 import { checkSumParseResults } from "./checksum.function.js"
 import { parseHtmlTemplates } from "./parseHtmlTemplates.function.js"
 import { reconstructCode } from "./reconstructCode.function.js"
-
-
-export type ParsedResult = { html: string, values?: unknown[], strings?: string[] }
-export type ParsedResults = ParsedResult[]
-export const string = 'string'
+import { ParsedResult, ParsedResults, string } from "./typings.js";
 
 // TODO: this function seem useless or its just cloning?
 export function extractTemplateParts(parsedResults: ParsedResults): ParsedResults {
