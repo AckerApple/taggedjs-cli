@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { parseCommandLineArguments } from './argv.function.js';
 import { fileURLToPath } from 'url';
+import { WebSocketServer } from 'ws';
 import webpack from 'webpack';
 // import webpackConfig from './webpack.config.js'
 export async function run(webpackConfig) {
@@ -65,7 +66,6 @@ export async function run(webpackConfig) {
     if (watchPath) {
         console.debug('👀 Watching path', watchPath);
     }
-    import { WebSocketServer, WebSocket } from 'ws';
     const wss = new WebSocketServer({ server });
     let promise = Promise.resolve();
     let running = false;
