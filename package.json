@@ -2,7 +2,7 @@
   "type": "module",
   "main": "bin/index.js",
   "name": "taggedjs-cli",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "quick setup and maintenance of a taggedjs project",
   "scripts": {
     "start": "ts-node ./src/tj.mts -i",
@@ -55,6 +55,7 @@
     "express": "^4.19.2",
     "fs-extra": "^11.2.0",
     "inquirer": "^9.2.19",
-    "taggedjs": "^2.6.4"
+    "taggedjs": "^2.6.4",
+    "ws": "^8.18.0"
   }
 }

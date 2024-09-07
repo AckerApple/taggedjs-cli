@@ -4,6 +4,7 @@ import path from 'path'
 import { parseCommandLineArguments } from './argv.function.js'
 import { fileURLToPath } from 'url'
 
+import { WebSocketServer, WebSocket } from 'ws'
 import webpack from 'webpack'
 // import webpackConfig from './webpack.config.js'
 
@@ -84,7 +85,6 @@ export async function run(webpackConfig: webpack.Compiler) {
     console.debug('👀 Watching path', watchPath)
   }
   
-  import { WebSocketServer, WebSocket } from 'ws'
   const wss = new WebSocketServer({ server })
   let promise = Promise.resolve()
   let running = false
