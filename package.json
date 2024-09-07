@@ -2,7 +2,7 @@
   "type": "module",
   "main": "bin/index.js",
   "name": "taggedjs-cli",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "quick setup and maintenance of a taggedjs project",
   "scripts": {
     "start": "ts-node ./src/tj.mts -i",
@@ -36,6 +36,7 @@
   "devDependencies": {
     "@babel/core": "^7.23.6",
     "@babel/preset-env": "^7.23.6",
+    "@types/express": "^4.17.21",
     "@types/fs-extra": "^11.0.4",
     "@types/inquirer": "^9.0.7",
     "@types/jest": "^29.5.12",
