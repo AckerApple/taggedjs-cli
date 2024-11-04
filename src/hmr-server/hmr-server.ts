@@ -6,9 +6,10 @@ import { fileURLToPath } from 'url'
 
 import { WebSocketServer, WebSocket } from 'ws'
 import webpack from 'webpack'
+import { run as runBundler } from './bundle.script.js'
 // import webpackConfig from './webpack.config.js'
 
-export async function run(webpackConfig: webpack.Compiler) {
+export async function run(webpackConfig: webpack.Configuration) {
   // Create a compiler instance with the configuration
   const compiler = webpack(webpackConfig as any)
   
@@ -18,29 +19,30 @@ export async function run(webpackConfig: webpack.Compiler) {
   const app = express();
   const port = 3000;
   
+  const baseRoot = process.cwd() // __dirname
   const rootPath = './' // '../'
   
-  const bundleScript = await import(rootPath + 'bundleScript.js')
-  const servePath = path.join(__dirname, rootPath)
+  // const bundleScript = await import(rootPath + 'bundleScript.js')
+  const servePath = path.join(baseRoot, rootPath)
   
   console.debug('📂 servePath',servePath)
   
-  const index = path.join(__dirname, rootPath, 'index.html')
+  const index = path.join(baseRoot, rootPath, 'index.html')
   const indexString = fs.readFileSync(index).toString()
   
-  const inject = path.join(__dirname, 'hmr', 'hmr.bundle.js')
+  const inject = path.join(baseRoot, 'hmr', 'hmr.bundle.js')
   const customScript = '<script type="module">'+ fs.readFileSync(inject).toString() +'</script>'
   const args = parseCommandLineArguments()
   
   // CLI dir here
-  const watchPath = args.dir ? path.join(__dirname, args.dir) : __dirname
+  const watchPath = args.dir ? path.join(baseRoot, args.dir) : baseRoot
   
-  const indexFilePath = path.join(__dirname, rootPath, 'index.html')
+  const indexFilePath = path.join(baseRoot, rootPath, 'index.html')
   
   // Custom middleware for serving static files
   app.use((req, res, next) => {
     const correctedPath = req.url === '/' ? 'index.html' : req.url
-    const filePath = path.join(__dirname, rootPath, correctedPath)
+    const filePath = path.join(baseRoot, rootPath, correctedPath)
   
     // Check if the requested file is an HTML file
     const customScriptInjection = path.extname(filePath) === '.html'
@@ -166,7 +168,8 @@ export async function run(webpackConfig: webpack.Compiler) {
     running = true
     promise = promise.then(async () => {
       console.debug('🏗️ making bundle...')
-      await bundleScript.run(compiler)
+      // await bundleScript.run(compiler)
+      runBundler(compiler)
       running = false
     }).catch(error =>
       console.error('Error bundling', error)

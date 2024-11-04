@@ -1,2 +1,2 @@
 import webpack from 'webpack';
-export declare function run(webpackConfig: webpack.Compiler): Promise<void>;
+export declare function run(webpackConfig: webpack.Configuration): Promise<void>;

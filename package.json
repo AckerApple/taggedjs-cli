@@ -2,21 +2,16 @@
   "type": "module",
   "main": "bin/index.js",
   "name": "taggedjs-cli",
-  "version": "0.0.21",
+  "version": "0.1.1",
   "description": "quick setup and maintenance of a taggedjs project",
   "scripts": {
     "start": "ts-node ./src/tj.mts -i",
-    "build": "run-s build:js && echo \"✅ Build completed\"",
-    "build:js": "run-s build:bin build:js-stamp copy:js-stamp-files build:es-stamp copy:es-stamp-files",
-    "build:bin": "rm -rf ./bin && tsc --project ./tsconfig.bin.json",
-    "build:js-stamp": "rm -rf ./js-stamp && tsc --project ./tsconfig.js-stamp.json",
-    "build:es-stamp": "rm -rf ./es-stamp && tsc --project ./tsconfig.es-stamp.json",
-    "copy:js-stamp-files": "cp ts-stamp/*.html js-stamp/ && cp -R ts-stamp/assets js-stamp",
-    "copy:es-stamp-files": "cp ts-stamp/*.html es-stamp/ && cp -R ts-stamp/assets es-stamp",
-    "save": "npm run patch:version && git add . && git commit -m \"patch\" && git push",
+    "build": "run-s build:bin && echo \"✅ Build completed\"",
+    "build:bin": "rm -rf ./bin && tsc --project ./tsconfig.bin.json && echo \"✅ Build bin files completed\"",
+    "save": "npm run patch:version && git add . && git commit -m \"patch\" && git push && echo \"✅ 💾 Git files saved\"",
     "patch:version": "npm --no-git-tag-version version patch",
     "tj": "node ./bin/tj.mjs -i",
-    "deploy": "npm run build && npm run save && npm publish"
+    "publish": "npm run build && npm run save && npm publish"
   },
   "bin": {
     "tj": "./bin/tj.mjs"
@@ -56,7 +51,7 @@
     "express": "^4.19.2",
     "fs-extra": "^11.2.0",
     "inquirer": "^9.2.19",
-    "taggedjs": "^2.6.4",
+    "taggedjs": "^2.7.6",
     "ws": "^8.18.0"
   }
 }
