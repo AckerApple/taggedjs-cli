@@ -2,7 +2,7 @@
   "type": "module",
   "main": "bin/index.js",
   "name": "taggedjs-cli",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "quick setup and maintenance of a taggedjs project",
   "scripts": {
     "start": "ts-node ./src/tj.mts -i",
@@ -11,7 +11,7 @@
     "save": "npm run patch:version && git add . && git commit -m \"patch\" && git push && echo \"✅ 💾 Git files saved\"",
     "patch:version": "npm --no-git-tag-version version patch",
     "tj": "node ./bin/tj.mjs -i",
-    "publish": "npm run build && npm run save && npm publish"
+    "deploy": "npm run build && npm run save && npm publish"
   },
   "bin": {
     "tj": "./bin/tj.mjs"
