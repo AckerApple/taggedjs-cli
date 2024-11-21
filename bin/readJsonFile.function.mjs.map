@@ -1,1 +1,0 @@
-{"version":3,"file":"readJsonFile.function.mjs","sourceRoot":"","sources":["../src/readJsonFile.function.mts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,MAAM,IAAI,CAAA;AAExB,MAAM,UAAU,YAAY,CAAC,QAAgB;IAC3C,MAAM,cAAc,GAAG,EAAE,CAAC,YAAY,CAAC,QAAQ,CAAC,CAAC,QAAQ,EAAE,CAAA;IAC3D,OAAO,IAAI,CAAC,KAAK,CAAC,cAAc,CAAC,CAAA;AACnC,CAAC"}
