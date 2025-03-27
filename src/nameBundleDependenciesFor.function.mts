@@ -1,5 +1,5 @@
 import * as path from "path"
-import { bundleConfig } from "./bundleConfig.function.mjs"
+import { bundleConfig } from "./bundle/bundleConfig.function.mjs"
 import { readJsonFile } from "./readJsonFile.function.mjs"
 import { getBaseConfig } from "./webpack.config.mjs"
 import webpack from "webpack"

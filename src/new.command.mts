@@ -8,7 +8,7 @@ import inquirer from 'inquirer'
 import { IGNORE, InteractiveCommand } from './command.utils.mjs'
 import { readJsonFile } from './readJsonFile.function.mjs'
 import { nameBundleDependenciesFor } from './nameBundleDependenciesFor.function.mjs'
-import { bundle, bundleTaggedJsPath } from './bundle.command.mjs'
+import { bundleTaggedJsPath } from './bundle/bundle.command.mjs'
 
 const promiseExec = util.promisify(exec)
 

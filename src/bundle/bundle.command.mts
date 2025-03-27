@@ -1,6 +1,6 @@
 import { bundleConfig } from './bundleConfig.function.mjs'
-import { InteractiveCommand } from './command.utils.mjs'
-import { getConfig, getTaggedJsConfig } from './webpack.config.mjs'
+import { InteractiveCommand } from '../command.utils.mjs'
+import { getConfig, getTaggedJsConfig } from '../webpack.config.mjs'
 import * as fsExtra from 'fs-extra'
 import * as path from 'path'
 

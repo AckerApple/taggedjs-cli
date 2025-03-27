@@ -2,9 +2,9 @@
 import * as path from 'path'
 import fsExtra, { readJSON } from "fs-extra/esm"
 import { newCommand } from './new.command.mjs'
-import { bundleDependencies } from './bundleDependencies.command.mjs'
+import { bundleDependencies } from './bundle/bundleDependencies.command.mjs'
 import { InteractiveCommand } from './command.utils.mjs'
-import { bundle } from './bundle.command.mjs'
+import { bundle } from './bundle/bundle.command.mjs'
 
 export const commands: {
   [name: string]: InteractiveCommand

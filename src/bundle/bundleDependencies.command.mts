@@ -1,13 +1,6 @@
-import * as fsExtra from 'fs-extra'
-import * as fs from 'fs'
 import * as path from 'path'
-import { exec } from 'child_process'
-import * as util from 'util'
-import packageJson from './package.mjs'
-import inquirer from 'inquirer'
-import { IGNORE, InteractiveCommand } from './command.utils.mjs'
-import { readJsonFile } from './readJsonFile.function.mjs'
-import { nameBundleDependenciesFor } from './nameBundleDependenciesFor.function.mjs'
+import { InteractiveCommand } from '../command.utils.mjs'
+import { nameBundleDependenciesFor } from '../nameBundleDependenciesFor.function.mjs'
 
 export const bundleDependencies: InteractiveCommand = {
   vars: {
