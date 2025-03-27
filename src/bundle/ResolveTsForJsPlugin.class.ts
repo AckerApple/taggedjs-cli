@@ -1,4 +1,4 @@
-export default class ResolveTsForJsPlugin {
+export class ResolveTsForJsPlugin {
   apply(compiler: any) {
     // Access the normal module factory
     compiler.hooks.normalModuleFactory.tap("ResolveTsForJsPlugin", (nmf: any) => {
@@ -18,3 +18,5 @@ export default class ResolveTsForJsPlugin {
     });
   }
 }
+
+export default ResolveTsForJsPlugin

@@ -1,3 +1,4 @@
-export default class ResolveTsForJsPlugin {
+export declare class ResolveTsForJsPlugin {
     apply(compiler: any): void;
 }
+export default ResolveTsForJsPlugin;

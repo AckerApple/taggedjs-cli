@@ -1,4 +1,4 @@
-export default class ResolveTsForJsPlugin {
+export class ResolveTsForJsPlugin {
     apply(compiler) {
         // Access the normal module factory
         compiler.hooks.normalModuleFactory.tap("ResolveTsForJsPlugin", (nmf) => {
@@ -17,4 +17,5 @@ export default class ResolveTsForJsPlugin {
         });
     }
 }
+export default ResolveTsForJsPlugin;
 //# sourceMappingURL=ResolveTsForJsPlugin.class.js.map
