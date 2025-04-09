@@ -103,6 +103,7 @@ export async function run(webpackConfig: webpack.Configuration) {
     ws.send('Connected to the WebSocket endpoint');
   });
   
+  let buildPromise = Promise.resolve()
   console.debug(`👀 Preparing to watch ${watchPath}...`)
   fs.watch(watchPath, { recursive: true }, async (eventType, filename) => {
     const ignore = running || !filename
@@ -120,7 +121,7 @@ export async function run(webpackConfig: webpack.Configuration) {
   
     console.debug('📄 file changed', filename)
   
-    await runBundle()
+    await buildPromise.then(runBundle)
       .then(() => {
         const messageObject = {
           type:'file-change',
