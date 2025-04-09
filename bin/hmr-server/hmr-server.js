@@ -96,7 +96,7 @@ export async function run(webpackConfig) {
             }
         }
         console.debug('📄 file changed', filename);
-        await buildPromise.then(runBundle)
+        buildPromise = buildPromise.then(runBundle)
             .then(() => {
             const messageObject = {
                 type: 'file-change',
@@ -109,6 +109,7 @@ export async function run(webpackConfig) {
             });
         })
             .catch((error) => console.error(error));
+        await buildPromise;
     });
     function sendFile(filePath, res) {
         fs.readFile(filePath, 'utf8', (err, data) => {
