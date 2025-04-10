@@ -2,7 +2,6 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import { parseCommandLineArguments } from './argv.function.js';
-import { fileURLToPath } from 'url';
 import { WebSocketServer } from 'ws';
 import webpack from 'webpack';
 import { run as runBundler } from './bundle.script.js';
@@ -10,8 +9,8 @@ import { run as runBundler } from './bundle.script.js';
 export async function run(webpackConfig) {
     // Create a compiler instance with the configuration
     const compiler = webpack(webpackConfig);
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
+    // const __filename = fileURLToPath(import.meta.url)
+    // const __dirname = path.dirname(__filename)
     const app = express();
     const port = 3000;
     const baseRoot = process.cwd(); // __dirname
@@ -136,8 +135,9 @@ export async function run(webpackConfig) {
         promise = promise.then(async () => {
             console.debug('🏗️ making bundle...');
             // await bundleScript.run(compiler)
-            runBundler(compiler);
+            const result = runBundler(compiler);
             running = false;
+            return result;
         }).catch(error => console.error('Error bundling', error));
         await promise;
         console.debug('✅ 🏗️ bundle made');

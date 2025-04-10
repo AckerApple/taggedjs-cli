@@ -13,8 +13,8 @@ export async function run(webpackConfig: webpack.Configuration) {
   // Create a compiler instance with the configuration
   const compiler = webpack(webpackConfig as any)
   
-  const __filename = fileURLToPath(import.meta.url)
-  const __dirname = path.dirname(__filename)
+  // const __filename = fileURLToPath(import.meta.url)
+  // const __dirname = path.dirname(__filename)
   
   const app = express();
   const port = 3000;
@@ -88,7 +88,7 @@ export async function run(webpackConfig: webpack.Configuration) {
   }
   
   const wss = new WebSocketServer({ server })
-  let promise = Promise.resolve()
+  let promise: Promise<any> = Promise.resolve()
   let running = false
   const connections: WebSocket[] = []
   
@@ -136,7 +136,7 @@ export async function run(webpackConfig: webpack.Configuration) {
       })
       .catch((error: Error) => console.error(error))
 
-      await buildPromise
+    await buildPromise
   });
   
   
@@ -172,8 +172,9 @@ export async function run(webpackConfig: webpack.Configuration) {
     promise = promise.then(async () => {
       console.debug('🏗️ making bundle...')
       // await bundleScript.run(compiler)
-      runBundler(compiler)
+      const result = runBundler(compiler)
       running = false
+      return result
     }).catch(error =>
       console.error('Error bundling', error)
     )
