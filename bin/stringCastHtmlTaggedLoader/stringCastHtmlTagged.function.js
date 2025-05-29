@@ -1,9 +1,10 @@
 // taggedjs-no-compile
 import { checkSumParseResults } from "./checksum.function.js";
 import { parseHtmlTemplates } from "./parseHtmlTemplates.function.js";
-import { reconstructCode } from "./reconstructCode.function.js";
+import { reconstructCode } from "./output/reconstructCode.function.js";
 import { string } from "./typings.js";
-// TODO: this function seem useless or its just cloning?
+/** Loop parsed items to clone them. Maybe useless?
+ * TODO: this function seem useless or its just cloning? */
 export function extractTemplateParts(parsedResults) {
     return parsedResults.map(item => {
         if (typeof item === string) {
@@ -15,6 +16,7 @@ export function extractTemplateParts(parsedResults) {
         }
     });
 }
+/** Loop parsed results looking for html`` to parse */
 function recursiveTemplateParse(parsedResults) {
     const recurseValues = (values) => {
         return values.map(value => {
@@ -46,6 +48,7 @@ function parseHtmlResults(code, parsedResults) {
     const detailedResults = extractTemplateParts(parsedResults);
     return recursiveTemplateParse(detailedResults);
 }
+/** Entire file string parsing starts here */
 export function stringCastHtmlTagged(code, filePath) {
     // return code
     if (code.includes('taggedjs-no-compile')) {

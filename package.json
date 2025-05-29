@@ -2,7 +2,7 @@
   "type": "module",
   "main": "bin/index.js",
   "name": "taggedjs-cli",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "description": "quick setup and maintenance of a taggedjs project",
   "scripts": {
     "start": "ts-node ./src/tj.mts -i",
@@ -48,7 +48,7 @@
     "webpack-cli": "^5.1.4"
   },
   "peerDependencies": {
-    "taggedjs": "^2.7.7"
+    "taggedjs": "^2.8.33"
   },
   "dependencies": {
     "express": "^4.19.2",

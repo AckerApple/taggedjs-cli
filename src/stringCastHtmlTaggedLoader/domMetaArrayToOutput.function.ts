@@ -1,5 +1,5 @@
 import { ParsedHtml } from "taggedjs"
-import { Reconstructed } from "./reconstructCode.function.js"
+import { Reconstructed } from "./output/reconstructCode.function.js"
 
 export function domMetaArrayToOutput(
   reconstructed: Reconstructed,

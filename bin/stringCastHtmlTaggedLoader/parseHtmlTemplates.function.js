@@ -45,6 +45,7 @@ export function removeInterpolatedValues(input) {
     }
     return { strings, values };
 }
+/** Read entire string looking for html`` to parse against */
 export function parseHtmlTemplates(code) {
     const results = [];
     let lastIndex = 0;

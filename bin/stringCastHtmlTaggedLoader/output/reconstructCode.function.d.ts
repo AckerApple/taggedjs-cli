@@ -1,4 +1,4 @@
-import { ParsedResults } from "./typings.js";
+import { ParsedResults } from "../typings.js";
 type AllStrings = {
     strings: string[];
     valueCount: number;

@@ -2,10 +2,11 @@
 
 import { checkSumParseResults } from "./checksum.function.js"
 import { parseHtmlTemplates } from "./parseHtmlTemplates.function.js"
-import { reconstructCode } from "./reconstructCode.function.js"
+import { reconstructCode } from "./output/reconstructCode.function.js"
 import { ParsedResult, ParsedResults, string } from "./typings.js";
 
-// TODO: this function seem useless or its just cloning?
+/** Loop parsed items to clone them. Maybe useless?
+ * TODO: this function seem useless or its just cloning? */
 export function extractTemplateParts(parsedResults: ParsedResults): ParsedResults {
   return parsedResults.map(item => {
     if (typeof item === string) {
@@ -17,6 +18,7 @@ export function extractTemplateParts(parsedResults: ParsedResults): ParsedResult
   });
 }
 
+/** Loop parsed results looking for html`` to parse */
 function recursiveTemplateParse(
   parsedResults: ParsedResults
 ): ParsedResults {
@@ -58,6 +60,7 @@ function parseHtmlResults(
   return recursiveTemplateParse(detailedResults);
 }
 
+/** Entire file string parsing starts here */
 export function stringCastHtmlTagged(
   code: string,
   filePath: string

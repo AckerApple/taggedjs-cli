@@ -1,6 +1,6 @@
 // taggedjs-no-compile
 
-import { Reconstructed } from "./reconstructCode.function.js"
+import { Reconstructed } from "./output/reconstructCode.function.js"
 import { getDomMeta } from "taggedjs/js/tag/domMetaCollector.js"
 import { domMetaArrayToOutput } from "./domMetaArrayToOutput.function.js"
 

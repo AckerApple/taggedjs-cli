@@ -1,6 +1,6 @@
 // taggedjs-no-compile
 import { checkSumParseResults } from "./checksum.function.js";
-import { reconstructCode } from "./reconstructCode.function.js";
+import { reconstructCode } from "./output/reconstructCode.function.js";
 import { reconstructedToOutput } from "./reconstructedToOutput.function.js";
 import { string } from "./typings.js";
 import { stringCastHtml } from "./stringCastHtmlTagged.function.js";
